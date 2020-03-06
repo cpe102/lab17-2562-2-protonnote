@@ -37,40 +37,56 @@ int main(){
         score_list.push_back(sum);
         name_list.push_back(name);
     }
-    string a;
+    vector <string> name_list1;
+        for (int p = 0 ; p < name_list.size() ; p++)
+    {
+        name_list1.push_back(name_list[p]);
+    }
+    string word;
     for(int b = 0 ; ; b++){
         for (int i=0 ; ; i++){
             cout << "Please input your command : ";
-            getline (cin,a);
-            a = tolower_for_str (a);
-            if ( a.substr(0,5) == "grade" ) break;
-                else if (a.substr(0,3) == "name") break;
-                else cout << "Invalid command " << endl;
+            getline (cin,word);
+            word = tolower_for_str (word);
+            if ( word == "exit") break;
+            if ( word.substr(0,5) == "grade" || word.substr(0,4) == "name" ) break;
+            else cout << "Invalid command " << endl;
         }
         cout << "---------------------------------" << endl;
-        if (a.substr(6,1) == "a" || a.substr(6,1) == "b" || a.substr(6,1) == "c" || a.substr(6,1) == "d" || a.substr(6,1) == "f" ){   
-            for (int j = 0 ; j < g_list.size() ; j++){
-                for (int f = 0 ; f < g_list.size() ; f++){
-                    g_list[f] = tolower_for_str (g_list[f]);
-                }
-                if (a.substr(6,1) == g_list[j]) cout << name_list[j] << endl;
-                //else cout << "Cannot found" << endl;
+        if ( word.substr(0,5) == "grade" ){
+            bool checkgrade = 0;
+            if (word.substr(6,1) == "a" || word.substr(6,1) == "b" || word.substr(6,1) == "c" || word.substr(6,1) == "d" || word.substr(6,1) == "f" ){   
+                for (int j = 0 ; j < g_list.size() ; j++){
+                    for (int f = 0 ; f < g_list.size() ; f++){
+                        g_list[f] = tolower_for_str (g_list[f]);
+                        checkgrade += 1;
+                    }
+                    if (word.substr(6,1) == g_list[j]) cout << name_list1[j] << endl;
+                } 
             }
+             if (checkgrade == 0) cout << "Cannot found. " << endl;
             cout << "---------------------------------" << endl;
         }
-        for (int z = 0 ; z < name_list.size() ; z++){
-            if (a.substr(3,a.size()-5) == name_list[z]){   
-                for (int k = 0 ; k < g_list.size() ; k++){
-                    if (a.substr(5) == name_list[k]) cout << name_list[k] << "grade = " << g_list[k];
-                    //else cout << "Cannot found" << endl;
-                } 
-                cout << "---------------------------------";
+        
+        if (word.substr(0,4) == "name") {
+           for (int r = 0 ; r < g_list.size() ; r++){
+                   name_list[r] = tolower_for_str (name_list[r]);
             }
+            bool checkname = 0;
+            for ( int z = 0 ; z < name_list.size() ; z++){
+                if ( name_list[z] == word.substr(5,word.size())){
+                    checkname += 1;
+                    for (int k = 0 ; k < g_list.size() ; k++){
+                        if (word.substr(5,word.size()) == name_list[k]) {
+                            cout << name_list1[k] << "'s grade = " << g_list[k] << endl;  
+                        }
+                    } 
+                }
+            }
+            if (checkname == 0) cout << "Cannot found. " << endl;
+            cout << "---------------------------------" << endl;
         }
-        if ( a == "exit") break;
+        if ( word == "exit") break;
     }
-    /* for (int i = 0 ; i < name_list.size() ; i++ ){
-        cout << name_list[i] << " " << score_list[i] << " " << g_list[i] << endl;
-    }*/
     return 0;
 }
