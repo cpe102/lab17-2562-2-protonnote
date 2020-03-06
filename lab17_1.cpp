@@ -28,10 +28,10 @@ int main(){
     	char format [] = "%[^:]: %f %f %f";
         sscanf (textline.c_str() , format , name , &a , &b , &c);
         sum = a + b + c ;
-        if(sum > 80) grade = "A";
-            else if (sum > 70) grade = "B";
-            else if (sum > 60) grade = "C";
-            else if (sum > 50) grade = "D";
+        if(sum >= 80) grade = "A";
+            else if (sum >= 70) grade = "B";
+            else if (sum >= 60) grade = "C";
+            else if (sum >= 50) grade = "D";
             else grade = "F";
         g_list.push_back(grade.c_str());
         score_list.push_back(sum);
@@ -69,5 +69,8 @@ int main(){
         }
         if ( a == "exit") break;
     }
+    /* for (int i = 0 ; i < name_list.size() ; i++ ){
+        cout << name_list[i] << " " << score_list[i] << " " << g_list[i] << endl;
+    }*/
     return 0;
 }
